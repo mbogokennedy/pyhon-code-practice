@@ -148,7 +148,7 @@ if __name__ == '__main__':
 # reversed array
 
 def reverseArray(a):
-    return arr[::-1]
+    return a[::-1]
        
 
 if __name__ == '__main__':
@@ -162,5 +162,41 @@ if __name__ == '__main__':
 
     fptr.write(' '.join(map(str, res)))
     fptr.write('\n')
+
+    fptr.close()
+
+#Complete 2D challege hourglassSum
+# Complete hourglassSum function below.
+def gethourglass(matrix, row, col):
+    sum = 0
+    sum+= matrix[row-1][col-1]
+    sum+= matrix[row-1][col]
+    sum+= matrix[row-1][col+1]
+    sum+= matrix[row][col]
+    sum+= matrix[row+1][col-1]
+    sum+= matrix[row+1][col]
+    sum+= matrix[row+1][col+1]
+    return sum
+
+def hourglassSum(arr):
+    maxTotal = -63
+    for i in range(1, 5):
+        for j in  range(1, 5):
+            total = gethourglass(arr, i, j)
+            if total > maxTotal:
+                maxTotal = total
+    return maxTotal
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    arr = []
+
+    for _ in range(6):
+        arr.append(list(map(int, input().rstrip().split())))
+
+    result = hourglassSum(arr)
+
+    fptr.write(str(result) + '\n')
 
     fptr.close()
